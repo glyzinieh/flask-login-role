@@ -1,43 +1,32 @@
-# role_required
-A super light-weight alternative to flask-user or flask-security that adds
-role requirements for views to flask-login.
+# Flask-Login-Role
 
-role_required is a template for a view decorator that can be customized to
-restrict access to flask views to users who have been given a specific role.
-The app will now have "privileged" users, in addition to the authorized and
-unauthorized users that flask-login provides. The template defines the
-decorator as ROLE_required with the expectation that ROLE will be replaced by
-the developer to fit the context of their app. For example, ROLE could be
-changed to admin, giving the developer an @admin_required decorator.. 
+A super light-weight alternative to Flask-User or Flask-Security that adds role requirements for views to Flask-Login.
 
-***The developer should change all instances of ROLE (in all-caps) for proper
-functionality***
+## Features
 
-User models will need a role attribute which can be set to match the value of
-ROLE chosen by the developer. If the role attribute equals anything other than
-the chosen string, the user will not be able to access the @ROLE_required
-decorated views.
+### `role_required`
 
-The @ROLE_required decorator includes the same functionality as flask-login's
-@login-required. It will redirect unauthorized users to the same view as
-@login_required. The developer specifies a 'not_ROLE' view that users who are
-authorized aren't privileged are redirected to.
+This decorator requires that a user be authenticated and have their role attribute set to one of the roles specified. If the current user is authenticated but does not have their role in the specified roles, the user is sent to the `LoginManager.no_role` callback.
 
-Set Up (see app.py for an example of proper set up):
+### `no_role`
 
--Add role_required.py to the flask app's directory where it can be accessed by
-the same file that instantiates flask_login.LoginManager.
+This method of `LoginManager` requires that you provide a `no_role_view` attribute to `LoginManager`. `no_role_view` can be provided where you provide a `login_view` for unauthorized users.
 
--From role_required import not_ROLE, and add a not_ROLE method to LoginManager.
+## Installation
 
--Give LoginManager a not_ROLE_view attribute that is a string that indicates
-which view function to redirect authorized but unprivileged users to.
+```
+pip install Flask-Login-Role@git+https://github.com/glyzinieh/flask-login-role
+```
 
--From role_required import ROLE_required wherever routes are defined, and
-decorate privileged routes.
+## Usage
 
-Demo:
-To demo the functionality, clone the whole repo. Run the flask app in a
-virtualenv with flask-login installed. In app.py, take turns uncommenting the
-three different demo users to see which pages they can and can't access, and
-which redirect views they are sent to.
+See [sample/app.py](sample/app.py) for an example of proper set up.
+
+- `User` model will need a `role` attribute with the required permissions.
+- `from flask_login_role import no_role`, and add a `no_role` method to `LoginManager`
+- Give `LoginManager` a `no_role_view` attribute that is a string that indicates which view function to redirect authorized but unprivileged users to.
+- `from flask_login_role import role_required` wherever routes are defined, and decorate privilleged routes.
+
+## Thanks
+
+Thanks to @schwartz721 for creating the project from which we forked.
