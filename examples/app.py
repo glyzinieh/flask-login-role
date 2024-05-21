@@ -14,7 +14,7 @@ login_manager.no_role_view = "no-role"
 
 # You can demo the @role_required functionality by running this flask app with
 # different demo users. Uncomment a user and try to access the views below.
-from sample.demo_users import BasicUser, RoleUser, UnauthorizedUser
+from examples.demo_users import BasicUser, RoleUser, UnauthorizedUser
 
 # user = UnauthorizedUser()
 # user = BasicUser()

@@ -20,7 +20,7 @@ pip install Flask-Login-Role@git+https://github.com/glyzinieh/flask-login-role
 
 ## Usage
 
-See [sample/app.py](sample/app.py) for an example of proper set up.
+See [examples/app.py](examples/app.py) for an example of proper set up.
 
 - `User` model will need a `role` attribute with the required permissions.
 - `from flask_login_role import no_role`, and add a `no_role` method to `LoginManager`
@@ -29,4 +29,4 @@ See [sample/app.py](sample/app.py) for an example of proper set up.
 
 ## Thanks
 
-Thanks to @schwartz721 for creating the project from which we forked.
+Thanks to [@schwartz721](https://github.com/schwartz721/role_required) for creating the project from which we forked.
